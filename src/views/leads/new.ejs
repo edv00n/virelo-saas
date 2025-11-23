@@ -1,0 +1,18 @@
+<%- include('../layout', { body: '' }) %>
+<section class="section">
+  <h1>Add lead</h1>
+  <form action="/leads" method="POST" class="form">
+    <label>Name</label>
+    <input type="text" name="name" required>
+    <label>Phone</label>
+    <input type="text" name="phone">
+    <label>Email</label>
+    <input type="email" name="email">
+    <label>Service</label>
+    <input type="text" name="service">
+    <label>Source</label>
+    <input type="text" name="source" placeholder="Instagram, FB Ads, Website, etc.">
+    <button type="submit" class="btn-primary">Save</button>
+  </form>
+</section>
+

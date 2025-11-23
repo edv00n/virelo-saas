@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Virelo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="nav">
+    <div class="nav-left">
+      <a href="/dashboard" class="logo">Virelo</a>
+    </div>
+    <nav class="nav-right">
+      <% if (currentUser) { %>
+        <a href="/dashboard">Dashboard</a>
+        <a href="/leads">Leads</a>
+        <form action="/logout" method="POST" style="display:inline;">
+          <button type="submit" class="link-button">Logout</button>
+        </form>
+      <% } else { %>
+        <a href="/login">Login</a>
+        <a href="/signup">Sign up</a>
+      <% } %>
+    </nav>
+  </header>
+
+  <main class="main">
+    <% if (success && success.length) { %>
+      <div class="flash flash-success"><%= success %></div>
+    <% } %>
+    <% if (error && error.length) { %>
+      <div class="flash flash-error"><%= error %></div>
+    <% } %>
+
+    <%- body %>
+  </main>
+</body>
+</html>
+

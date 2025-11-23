@@ -1,0 +1,42 @@
+<%- include('../layout', { body: '' }) %>
+<section class="section">
+  <a href="/leads" class="muted">&larr; Back to leads</a>
+  <h1><%= lead.name %></h1>
+  <p><strong>Phone:</strong> <%= lead.phone || 'N/A' %></p>
+  <p><strong>Email:</strong> <%= lead.email || 'N/A' %></p>
+  <p><strong>Service:</strong> <%= lead.service || 'N/A' %></p>
+  <p><strong>Source:</strong> <%= lead.source || 'N/A' %></p>
+
+  <form action="/leads/<%= lead.id %>/status" method="POST" class="form-inline">
+    <label>Status</label>
+    <select name="status">
+      <option value="new" <%= lead.status === 'new' ? 'selected' : '' %>>New</option>
+      <option value="in_progress" <%= lead.status === 'in_progress' ? 'selected' : '' %>>In progress</option>
+      <option value="booked" <%= lead.status === 'booked' ? 'selected' : '' %>>Booked</option>
+      <option value="lost" <%= lead.status === 'lost' ? 'selected' : '' %>>Lost</option>
+    </select>
+    <button type="submit" class="btn-primary">Update</button>
+  </form>
+
+  <h2 style="margin-top:2rem;">Messages</h2>
+  <% if (messages.length === 0) { %>
+    <p class="muted">No messages yet.</p>
+  <% } else { %>
+    <div class="messages">
+      <% messages.forEach(msg => { %>
+        <div class="message <%= msg.sender === 'lead' ? 'from-lead' : 'from-business' %>">
+          <div class="content"><%= msg.content %></div>
+          <div class="meta muted"><%= msg.sender %> • <%= msg.created_at %></div>
+        </div>
+      <% }) %>
+    </div>
+  <% } %>
+
+  <form action="/leads/<%= lead.id %>/messages" method="POST" class="form">
+    <input type="hidden" name="sender" value="business">
+    <label>Add note / message (no SMS yet)</label>
+    <textarea name="content" rows="3" required></textarea>
+    <button type="submit" class="btn-primary">Add message</button>
+  </form>
+</section>
+

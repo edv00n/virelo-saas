@@ -1,0 +1,17 @@
+<%- include('../layout', { body: '' }) %>
+<section class="section auth-section">
+  <h1>Create your Virelo account</h1>
+  <form action="/signup" method="POST" class="form">
+    <label>Name</label>
+    <input type="text" name="name">
+    <label>Business name</label>
+    <input type="text" name="business_name">
+    <label>Email</label>
+    <input type="email" name="email" required>
+    <label>Password</label>
+    <input type="password" name="password" required>
+    <button type="submit" class="btn-primary">Sign up</button>
+  </form>
+  <p>Already have an account? <a href="/login">Log in</a></p>
+</section>
+

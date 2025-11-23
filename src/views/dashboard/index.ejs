@@ -1,0 +1,36 @@
+<%- include('../layout', { body: '' }) %>
+<section class="section">
+  <h1>Welcome, <%= currentUser?.business_name || currentUser?.email %></h1>
+  <div class="grid-3">
+    <div class="card">
+      <h2>Total leads</h2>
+      <p class="stat"><%= stats.leadCount %></p>
+    </div>
+    <div class="card">
+      <h2>New leads</h2>
+      <p class="stat"><%= stats.newLeads %></p>
+    </div>
+    <div class="card">
+      <h2>Booked</h2>
+      <p class="stat"><%= stats.bookedLeads %></p>
+    </div>
+  </div>
+
+  <h2 style="margin-top:2rem;">Recent leads</h2>
+  <% if (recentLeads.length === 0) { %>
+    <p>No leads yet. <a href="/leads/new">Add your first lead</a>.</p>
+  <% } else { %>
+    <div class="list">
+      <% recentLeads.forEach(lead => { %>
+        <a class="list-item" href="/leads/<%= lead.id %>">
+          <div>
+            <strong><%= lead.name %></strong>
+            <div class="muted"><%= lead.service || '' %></div>
+          </div>
+          <div class="muted"><%= lead.status %></div>
+        </a>
+      <% }) %>
+    </div>
+  <% } %>
+</section>
+
